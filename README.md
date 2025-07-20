@@ -30,11 +30,10 @@ Where:
 |------|-------------|
 | `Carranzaet.csv` | Input CSV with φ, displacement \( u_D \), and moment \( M \) |
 | `Carranza_Forward_PINN.py` | Train forward PINN using analytic M(φ) |
-| `Carranza_Inverse_PINN.py` | Train inverse PINN using analytic u(φ) |
+| `Carranza_Inverse_PINN.py` | Train forward PINN using analytic u(φ) |
 | `Carranza_forward_Predict.py` | Use trained forward model to infer \( u_D \) |
-| `Carranza_Inverse_Predict.py` | Use trained inverse model to infer \( M \) |
+| `Carranza_Inverse_Predict.py` | Use trained forward model to infer \( M \) |
 | `forward_pinn_quarter_state_carranza.pt` | Trained forward model |
-| `inverse_pinn_quarter_state_carranza.pt` | Trained inverse model |
 | `*.png` | Plots of predictions vs ground truth |
 | `.gitignore` | Ignores `venv/`, cache, etc. |
 
@@ -42,12 +41,12 @@ Where:
 
 ## 🔧 Training Logic
 
-### Forward PINN
+### Forward PINN 1
 - Trained with known **analytic** \( M(\phi) \)
 - Learns to map φ → \( u_D(\phi) \)
 - Boundary Conditions: \( u(0) \), \( u(\pi/2) \) from analytic solution
 
-### Inverse PINN
+### Forward PINN 2
 - Trained using **analytic** \( u(\phi) \), computes \( u''(\phi) \)
 - Learns to map φ → \( M(\phi) \)
 - Can optionally fine-tune with true \( M \) using supervision weight \( \lambda \)
